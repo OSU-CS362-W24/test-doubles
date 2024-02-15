@@ -74,24 +74,3 @@ test("correctly renders GitHub search results", async function () {
 	expect(results).toHaveLength(searchRepositoriesResult.items.length)
 	expect(results[0]).toHaveTextContent(searchRepositoriesResult.items[0].full_name)
 })
-
-test("correctly 2 renders GitHub search results", async function () {
-    initDomFromFiles(
-        __dirname + "/githubSearch.html",
-        __dirname + "/githubSearch.js"
-    )
-
-    const queryInput = domTesting.getByPlaceholderText(
-        document,
-        "Search GitHub"
-    )
-    const searchButton = domTesting.getByRole(document, "button")
-
-    const user = userEvent.setup()
-    await user.type(queryInput, "jest")
-    await user.click(searchButton)
-
-    const results = await domTesting.findAllByRole(document, "listitem")
-	expect(results).toHaveLength(searchRepositoriesResult.items.length)
-	expect(results[0]).toHaveTextContent(searchRepositoriesResult.items[0].full_name)
-})
